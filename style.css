@@ -4,3 +4,76 @@
 @media(max-width:760px){.wrap,.header{width:calc(100% - 32px)}.header{padding:15px}.header-link{display:none}.nav-toggle{margin-left:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:42px;height:40px;border:1px solid var(--line);background:transparent;cursor:pointer}.nav-toggle span{width:19px;height:2px;background:var(--cyan)}.nav{display:none;position:absolute;left:0;top:100%;right:0;flex-direction:column;align-items:stretch;gap:0;background:#101d26;padding:12px 20px;border:1px solid var(--line)}.nav.open{display:flex}.nav a{padding:12px 4px}.hero{display:flex;flex-direction:column;align-items:stretch;padding:72px 0 70px;gap:25px;min-height:auto}.hero h1{font-size:clamp(69px,13vw,110px)}.hero-art{min-height:385px}.hero-note{margin-top:35px}.section{padding-top:80px}.about-grid,.skill-grid,.projects{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(3,1fr)}.stat{padding:16px}.stat strong{font-size:18px}.stat small{font-size:11px}.contact-inner{padding:80px 0}.contact-inner h2{letter-spacing:-4px}.footer{flex-wrap:wrap}.footer span:nth-child(2){order:3;width:100%}}
 @media(max-width:520px){.hero h1{font-size:clamp(57px,14vw,79px);letter-spacing:-4px}.overline{font-size:9px}.hero-name{font-size:17px}.hero-art{min-height:330px}.ring{width:250px;height:250px}.ring-two{width:310px;height:140px}.center-shape{width:175px;height:175px}.center-shape span{font-size:63px}.ticker div{font-size:11px}.section-head h2{letter-spacing:-2px}.about-main{padding:25px}.stat-grid{grid-template-columns:1fr}.stat{padding:18px}.contact-inner h2{font-size:clamp(55px,13vw,90px)}.project-visual{height:240px}.footer{font-size:10px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* HERO PROFILE PHOTO */
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 500px;
+  isolation: isolate;
+  background: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+}
+
+/* Keep decorative artwork behind the photo */
+.hero-photo .grid-field,
+.hero-photo .ring {
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Your professional portrait */
+.hero-photo .profile-photo {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 580px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* Keep labels visible above the photo */
+.hero-photo .coordinate,
+.hero-photo .art-label {
+  z-index: 2;
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero-photo .coord-top {
+  top: 20px;
+  left: 20px;
+}
+
+.hero-photo .coord-bottom {
+  bottom: 54px;
+  left: 20px;
+}
+
+.hero-photo .art-label {
+  bottom: 16px;
+  left: 20px;
+}
+
+/* Hide the old developer symbol */
+.hero-photo .center-shape {
+  display: none;
+}
+
+/* Mobile responsive layout */
+@media (max-width: 768px) {
+  .hero-photo {
+    min-height: 350px;
+    border-radius: 18px;
+  }
+
+  .hero-photo .profile-photo {
+    max-height: 430px;
+  }
+}
