@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Editable student portfolio template for showcasing projects and skills.">
+  <title>Student Portfolio | Neon Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="header">
+    <a class="wordmark" href="#home" aria-label="Home"><span class="mark">▰</span> [NAME]<span class="blink">_</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav-links" aria-label="Main navigation">
+      <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="header-link" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main">
+    <section class="hero wrap" id="home">
+      <div class="hero-copy">
+        <p class="overline"><span class="live-dot"></span> HELLO, WORLD. I'M A STUDENT DEVELOPER.</p>
+        <h1>CRAFTING<br><span class="accent">WHAT'S</span><br>NEXT<span class="period">.</span></h1>
+        <p class="hero-name">Hi, I'm <strong>[YOUR FULL NAME]</strong> — [YOUR COURSE / ROLE].</p>
+        <p class="hero-description">I build, experiment, and learn by turning ideas into real projects. Here's a selection of my work and the technologies I'm exploring.</p>
+        <div class="actions"><a class="btn primary" href="#projects">Explore projects <span>↗</span></a><a class="btn outline" href="#about">Get to know me <span>↓</span></a></div>
+        <p class="hero-note">AVAILABLE FOR LEARNING & COLLABORATION // <span id="clock">2026</span></p>
+      </div>
+      <div class="hero-art" aria-label="Abstract technological illustration">
+        <div class="grid-field"></div><div class="ring ring-one"></div><div class="ring ring-two"></div>
+        <div class="center-shape"><span>&lt;/&gt;</span></div>
+        <span class="coordinate coord-top">SYS // 01</span><span class="coordinate coord-bottom">IDEAS → REALITY</span>
+        <div class="art-label">DESIGN <span>×</span> DEVELOPMENT</div>
+      </div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div>HTML <span>✳</span> CSS <span>✳</span> JAVASCRIPT <span>✳</span> CREATIVE THINKING <span>✳</span> WEB DEVELOPMENT <span>✳</span> LEARNING BY DOING <span>✳</span></div></div>
+    <section id="about" class="section wrap">
+      <div class="section-head"><span class="section-count">01 / PROFILE</span><h2>BEHIND THE <em>SCREEN.</em></h2></div>
+      <div class="about-grid"><div class="about-main"><span class="small-kicker">// THE INTRODUCTION</span><h3>Curiosity is my starting point.</h3><p>I'm <strong>[YOUR FULL NAME]</strong>, currently studying <strong>[YOUR COURSE]</strong> at <strong>[YOUR SCHOOL]</strong>. I'm interested in [YOUR INTERESTS] and enjoy finding practical ways to solve challenges through technology.</p><p>Through school activities, personal practice, and group projects, I'm developing skills in design, programming, and communicating ideas.</p><p class="hint">Replace the bracketed text with your own background and experience.</p></div><div class="stat-grid"><div class="stat"><span class="stat-icon">01</span><strong>IDEATE</strong><small>Explore and understand a problem</small></div><div class="stat"><span class="stat-icon">02</span><strong>BUILD</strong><small>Turn an approach into code</small></div><div class="stat"><span class="stat-icon">03</span><strong>IMPROVE</strong><small>Test, learn, and iterate</small></div></div></div>
+    </section>
+    <section id="skills" class="section wrap"><div class="section-head"><span class="section-count">02 / CAPABILITIES</span><h2>MY CURRENT <em>TOOLKIT.</em></h2><p>Examples below: edit to reflect skills you've really practiced.</p></div><div class="skill-grid"><article class="skill"><span class="skill-no">SKILL / 01</span><span class="skill-glyph">{ }</span><h3>Frontend basics</h3><p>Building pages, responsive layouts, and simple browser interactions.</p><div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></article><article class="skill"><span class="skill-no">SKILL / 02</span><span class="skill-glyph">◉</span><h3>Design thinking</h3><p>Exploring wireframes, typography, visual hierarchy, and useful interfaces.</p><div class="chips"><span>Layouts</span><span>UI basics</span><span>Accessibility</span></div></article><article class="skill"><span class="skill-no">SKILL / 03</span><span class="skill-glyph">↗</span><h3>Problem solving</h3><p>Breaking down tasks, debugging issues, and working with teammates.</p><div class="chips"><span>Research</span><span>Teamwork</span><span>Debugging</span></div></article></div></section>
+    <section id="projects" class="section wrap"><div class="section-head"><span class="section-count">03 / WORK IN PROGRESS</span><h2>SELECTED <em>PROJECTS.</em></h2><p>Replace these sample cards with your own classwork or practice projects, and update their links.</p></div><div class="projects"><article class="project"><div class="project-visual visual-one"><span class="visual-index">001</span><div class="browser-mock"><div class="browser-top"><i></i><i></i><i></i></div><div class="mock-bar"></div><div class="mock-flex"><div></div><div></div><div></div></div></div></div><div class="project-info"><span class="project-type">WEB DEVELOPMENT / CLASS PROJECT</span><h3>[PROJECT NAME ONE]</h3><p>Describe the problem, what the website or system does, and your specific contribution.</p><div class="chips"><span>HTML</span><span>CSS</span><span>Classwork</span></div><a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add your project link ↗</a></div></article><article class="project"><div class="project-visual visual-two"><span class="visual-index">002</span><div class="terminal"><span class="terminal-title">project.exe</span><span>&gt; initializing project...</span><span>&gt; compiling creative ideas</span><span class="terminal-success">&gt; ready to explore ▋</span></div></div><div class="project-info"><span class="project-type">PRACTICE PROJECT / PROGRAMMING</span><h3>[PROJECT NAME TWO]</h3><p>Explain the key feature, the tools used, and one important lesson you learned.</p><div class="chips"><span>Programming</span><span>Practice</span><span>Teamwork</span></div><a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add your project link ↗</a></div></article></div></section>
+    <section id="contact" class="contact-section"><div class="wrap contact-inner"><span class="section-count">04 / THE NEXT STEP</span><h2>GOT AN <span>IDEA?</span></h2><p>Let's connect, collaborate, or just say hello.</p><div class="actions"><a class="btn primary" href="mailto:replace-me@example.com">Send an email ↗</a><a class="btn outline" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a></div><small>Replace both contact links with your real details before publishing.</small></div></section>
+  </main>
+  <footer class="footer wrap"><span>© <span id="year">2026</span> [YOUR FULL NAME]</span><span>MADE WITH CURIOSITY // VERSION 01</span><a href="#home">BACK TO TOP ↑</a></footer>
+</body>
+</html>
