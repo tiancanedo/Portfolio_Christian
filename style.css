@@ -77,3 +77,26 @@
     max-height: 430px;
   }
 }
+
+.visual-three {
+  background: linear-gradient(135deg, #102a43, #2563eb, #38bdf8);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.visual-three::after {
+  content: "A";
+  position: absolute;
+  right: 24px;
+  bottom: -45px;
+  font-size: 180px;
+  font-weight: 800;
+  opacity: 0.15;
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-weight: 600;
+}
