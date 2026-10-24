@@ -3,7 +3,7 @@
 
 /* ==========================================
    CHRISTIAN TABANAS PORTFOLIO
-   RESPONSIVE SCROLL ANIMATION
+   SMOOTH FRAME-BY-FRAME SCROLL ANIMATION
 ========================================== */
 
 const TOTAL_FRAMES = 240;
@@ -18,6 +18,8 @@ const ctx = canvas
 const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
+
+/* FRAME CACHE */
 
 const frameCache = new Map();
 const frameQueue = [];
@@ -40,6 +42,7 @@ let scrollScheduled = false;
 
 function framePath(index) {
   const number = String(index + 1).padStart(3, "0");
+
   return `frames/ezgif-frame-${number}.png`;
 }
 
@@ -47,7 +50,11 @@ function framePath(index) {
 
 function requestFrame(index) {
   if (index < 0 || index >= TOTAL_FRAMES) return;
-  if (frameCache.has(index) || queued.has(index)) return;
+
+  const existing = frameCache.get(index);
+
+  if (existing && existing.status !== "error") return;
+  if (queued.has(index)) return;
 
   queued.add(index);
   frameQueue.push(index);
@@ -63,9 +70,14 @@ function processQueue() {
     frameQueue.length > 0
   ) {
     const index = frameQueue.shift();
+
     queued.delete(index);
 
-    if (frameCache.has(index)) continue;
+    const existing = frameCache.get(index);
+
+    if (existing && existing.status !== "error") {
+      continue;
+    }
 
     activeLoads++;
 
@@ -85,6 +97,7 @@ function processQueue() {
       });
 
       activeLoads--;
+
       requestDraw();
       processQueue();
       trimCache();
@@ -104,39 +117,47 @@ function processQueue() {
   }
 }
 
-/* LIMIT MEMORY */
+/* LIMIT CACHE MEMORY */
 
 function trimCache() {
   if (frameCache.size <= MAX_CACHE) return;
 
   const removable = [...frameCache.entries()]
-    .filter(([index, data]) =>
-      data.status === "ready" &&
-      index !== 0 &&
-      index !== displayedFrame
-    )
-    .sort((a, b) =>
-      Math.abs(b[0] - targetFrame) -
-      Math.abs(a[0] - targetFrame)
-    );
+    .filter(([index, data]) => {
+      return (
+        data.status === "ready" &&
+        index !== 0 &&
+        index !== displayedFrame
+      );
+    })
+    .sort((a, b) => {
+      return (
+        Math.abs(b[0] - targetFrame) -
+        Math.abs(a[0] - targetFrame)
+      );
+    });
 
   for (const [index] of removable) {
     if (frameCache.size <= MAX_CACHE) break;
+
     frameCache.delete(index);
   }
 }
 
-/* PRELOAD FRAMES NEAR SCROLL POSITION */
+/* LOAD FRAMES NEAR CURRENT POSITION */
 
 function loadNearby(index) {
   const desired = [];
 
   for (let offset = 0; offset <= 5; offset++) {
     desired.push(index + offset);
-    if (offset > 0) desired.push(index - offset);
+
+    if (offset > 0) {
+      desired.push(index - offset);
+    }
   }
 
-  /* Drop obsolete requests not started yet */
+  /* Remove obsolete queued requests */
 
   for (let i = frameQueue.length - 1; i >= 0; i--) {
     if (Math.abs(frameQueue[i] - index) > 12) {
@@ -176,7 +197,7 @@ function findLoaded(index) {
   return closest;
 }
 
-/* DRAW IMAGE ON RESPONSIVE CANVAS */
+/* RESPONSIVE CANVAS DRAWING */
 
 function drawFrame() {
   drawing = false;
@@ -193,10 +214,17 @@ function drawFrame() {
 
   const isMobile = canvasWidth <= 600;
 
-  let width, height, x, y;
+  let width;
+  let height;
+  let x;
+  let y;
 
   if (isMobile) {
-    /* Keep portrait visible on tall phone screens */
+    /*
+      On mobile, avoid extreme cropping
+      by scaling the image relative to
+      the screen width and upper viewport.
+    */
 
     const scale = Math.max(
       canvasWidth / image.naturalWidth,
@@ -210,7 +238,10 @@ function drawFrame() {
     y = canvasHeight * 0.075;
 
   } else {
-    /* Cover the hero area on desktop */
+    /*
+      Desktop: fill the entire canvas
+      while maintaining image proportions.
+    */
 
     const scale = Math.max(
       canvasWidth / image.naturalWidth,
@@ -232,7 +263,7 @@ function drawFrame() {
   displayedFrame = index;
 }
 
-/* REQUEST SMOOTH DRAWING */
+/* REQUEST NEXT DRAW */
 
 function requestDraw() {
   if (!ctx || drawing) return;
@@ -241,7 +272,7 @@ function requestDraw() {
   requestAnimationFrame(drawFrame);
 }
 
-/* RESIZE CANVAS */
+/* CANVAS RESIZING */
 
 function resizeCanvas() {
   if (!canvas || !ctx) return;
@@ -265,7 +296,7 @@ function resizeCanvas() {
   requestDraw();
 }
 
-/* READ SCROLL PROGRESS */
+/* SCROLL PROGRESS */
 
 function scrollProgress() {
   if (!hero) return 0;
@@ -281,7 +312,7 @@ function scrollProgress() {
   return Math.min(1, Math.max(0, progress));
 }
 
-/* CHANGE IMAGE ON SCROLL */
+/* UPDATE ANIMATION */
 
 function updateAnimation() {
   if (!hero || reducedMotion) return;
@@ -298,7 +329,7 @@ function updateAnimation() {
   requestDraw();
 }
 
-/* INITIALIZE HERO ANIMATION */
+/* INITIALIZE HERO */
 
 if (canvas && hero && ctx) {
   requestFrame(0);
@@ -306,9 +337,6 @@ if (canvas && hero && ctx) {
 
   if (!reducedMotion) {
     loadNearby(0);
-
-    /* Support opening the page at a scroll position */
-
     updateAnimation();
 
     window.addEventListener(
@@ -346,9 +374,7 @@ if (canvas && hero && ctx) {
   );
 }
 
-/* ==========================================
-   REVEAL ON SCROLL
-========================================== */
+/* REVEAL ON SCROLL */
 
 const revealElements = document.querySelectorAll(
   ".reveal"
@@ -383,9 +409,7 @@ if (
   });
 }
 
-/* ==========================================
-   MOBILE NAVIGATION
-========================================== */
+/* MOBILE NAVIGATION */
 
 const menu = document.querySelector(".nav-toggle");
 const nav = document.querySelector(".nav");
@@ -404,7 +428,9 @@ if (menu && nav) {
   nav.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       nav.classList.remove("open");
+
       menu.setAttribute("aria-expanded", "false");
+      menu.setAttribute("aria-label", "Open navigation");
     });
   });
 
@@ -412,13 +438,12 @@ if (menu && nav) {
     if (event.key === "Escape") {
       nav.classList.remove("open");
       menu.setAttribute("aria-expanded", "false");
+      menu.setAttribute("aria-label", "Open navigation");
     }
   });
 }
 
-/* ==========================================
-   COPYRIGHT YEAR
-========================================== */
+/* COPYRIGHT YEAR */
 
 const year = document.getElementById("year");
 
