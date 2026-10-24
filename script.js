@@ -2,11 +2,12 @@
 "use strict";
 
 /* ==========================================
-   CHRISTIAN TABANAS PORTFOLIO
-   SMOOTH FRAME-BY-FRAME SCROLL ANIMATION
+   PORTFOLIO SCROLL ANIMATION
 ========================================== */
 
 const TOTAL_FRAMES = 240;
+const MAX_CONCURRENT = 4;
+const MAX_CACHE = 48;
 
 const canvas = document.getElementById("hero-canvas");
 const hero = document.querySelector(".hero-scroll");
@@ -19,14 +20,9 @@ const reducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 ).matches;
 
-/* FRAME CACHE */
-
-const frameCache = new Map();
-const frameQueue = [];
+const cache = new Map();
+const queue = [];
 const queued = new Set();
-
-const MAX_CONCURRENT = 4;
-const MAX_CACHE = 40;
 
 let activeLoads = 0;
 let targetFrame = 0;
@@ -35,76 +31,68 @@ let displayedFrame = -1;
 let canvasWidth = 0;
 let canvasHeight = 0;
 
-let drawing = false;
+let drawScheduled = false;
 let scrollScheduled = false;
 
-/* FRAME FILE PATH */
+/* ==========================================
+   FRAME PATHS
+========================================== */
 
 function framePath(index) {
   const number = String(index + 1).padStart(3, "0");
-
   return `frames/ezgif-frame-${number}.png`;
 }
 
-/* REQUEST FRAMES */
+/* ==========================================
+   REQUEST FRAME
+========================================== */
 
 function requestFrame(index) {
   if (index < 0 || index >= TOTAL_FRAMES) return;
-
-  const existing = frameCache.get(index);
-
-  if (existing && existing.status !== "error") return;
-  if (queued.has(index)) return;
+  if (cache.has(index) || queued.has(index)) return;
 
   queued.add(index);
-  frameQueue.push(index);
+  queue.push(index);
 
   processQueue();
 }
 
-/* LOAD IMAGES */
+/* ==========================================
+   LOAD FRAMES
+========================================== */
 
 function processQueue() {
-  while (
-    activeLoads < MAX_CONCURRENT &&
-    frameQueue.length > 0
-  ) {
-    const index = frameQueue.shift();
-
+  while (activeLoads < MAX_CONCURRENT && queue.length) {
+    const index = queue.shift();
     queued.delete(index);
 
-    const existing = frameCache.get(index);
-
-    if (existing && existing.status !== "error") {
-      continue;
-    }
+    if (cache.has(index)) continue;
 
     activeLoads++;
 
     const image = new Image();
+    image.decoding = "async";
 
-    frameCache.set(index, {
+    cache.set(index, {
       image,
       status: "loading"
     });
 
-    image.decoding = "async";
-
     image.onload = () => {
-      frameCache.set(index, {
+      cache.set(index, {
         image,
         status: "ready"
       });
 
       activeLoads--;
 
+      trimCache();
       requestDraw();
       processQueue();
-      trimCache();
     };
 
     image.onerror = () => {
-      frameCache.set(index, {
+      cache.set(index, {
         image: null,
         status: "error"
       });
@@ -117,102 +105,100 @@ function processQueue() {
   }
 }
 
-/* LIMIT CACHE MEMORY */
+/* ==========================================
+   CACHE MANAGEMENT
+========================================== */
 
 function trimCache() {
-  if (frameCache.size <= MAX_CACHE) return;
+  if (cache.size <= MAX_CACHE) return;
 
-  const removable = [...frameCache.entries()]
-    .filter(([index, data]) => {
-      return (
-        data.status === "ready" &&
-        index !== 0 &&
-        index !== displayedFrame
-      );
-    })
-    .sort((a, b) => {
-      return (
-        Math.abs(b[0] - targetFrame) -
-        Math.abs(a[0] - targetFrame)
-      );
-    });
+  const removable = [...cache.entries()]
+    .filter(([index, item]) =>
+      item.status === "ready" &&
+      index !== 0 &&
+      index !== displayedFrame
+    )
+    .sort((a, b) =>
+      Math.abs(b[0] - targetFrame) -
+      Math.abs(a[0] - targetFrame)
+    );
 
   for (const [index] of removable) {
-    if (frameCache.size <= MAX_CACHE) break;
-
-    frameCache.delete(index);
+    if (cache.size <= MAX_CACHE) break;
+    cache.delete(index);
   }
 }
 
-/* LOAD FRAMES NEAR CURRENT POSITION */
+/* ==========================================
+   LOAD FRAMES NEAR TARGET
+========================================== */
 
 function loadNearby(index) {
-  const desired = [];
-
-  for (let offset = 0; offset <= 5; offset++) {
-    desired.push(index + offset);
-
-    if (offset > 0) {
-      desired.push(index - offset);
+  // Clear queued requests far from the new target.
+  for (let i = queue.length - 1; i >= 0; i--) {
+    if (Math.abs(queue[i] - index) > 12) {
+      queued.delete(queue[i]);
+      queue.splice(i, 1);
     }
   }
 
-  /* Remove obsolete queued requests */
+  const nearby = [index];
 
-  for (let i = frameQueue.length - 1; i >= 0; i--) {
-    if (Math.abs(frameQueue[i] - index) > 12) {
-      queued.delete(frameQueue[i]);
-      frameQueue.splice(i, 1);
-    }
+  for (let distance = 1; distance <= 6; distance++) {
+    nearby.push(index + distance);
+    nearby.push(index - distance);
   }
 
-  for (const frame of desired) {
+  for (const frame of nearby) {
     requestFrame(frame);
   }
 }
 
-/* FIND CLOSEST LOADED FRAME */
+/* ==========================================
+   GET CLOSEST AVAILABLE FRAME
+========================================== */
 
-function findLoaded(index) {
-  const exact = frameCache.get(index);
-
-  if (exact?.status === "ready") {
+function findReadyFrame(index) {
+  if (cache.get(index)?.status === "ready") {
     return index;
   }
 
   let closest = -1;
   let distance = Infinity;
 
-  for (const [number, data] of frameCache) {
-    if (data.status !== "ready") continue;
+  for (const [number, item] of cache) {
+    if (item.status !== "ready") continue;
 
     const difference = Math.abs(number - index);
 
     if (difference < distance) {
-      closest = number;
       distance = difference;
+      closest = number;
     }
   }
 
   return closest;
 }
 
-/* RESPONSIVE CANVAS DRAWING */
+/* ==========================================
+   DRAW FRAME
+========================================== */
 
 function drawFrame() {
-  drawing = false;
+  drawScheduled = false;
 
   if (!ctx || !canvasWidth || !canvasHeight) return;
 
-  const index = findLoaded(targetFrame);
-
+  const index = findReadyFrame(targetFrame);
   if (index < 0 || index === displayedFrame) return;
 
-  const image = frameCache.get(index)?.image;
-
+  const image = cache.get(index)?.image;
   if (!image || !image.naturalWidth) return;
 
-  const isMobile = canvasWidth <= 600;
+  const imageWidth = image.naturalWidth;
+  const imageHeight = image.naturalHeight;
+
+  const isMobile = window.innerWidth <= 600;
 
   let width;
   let height;
@@ -221,58 +207,74 @@ function drawFrame() {
 
   if (isMobile) {
     /*
-      On mobile, avoid extreme cropping
-      by scaling the image relative to
-      the screen width and upper viewport.
+      Mobile portrait area:
+      Fill the upper image section and
+      center the portrait without stretching.
+
+      The HTML text is positioned below
+      this canvas through CSS.
     */
 
     const scale = Math.max(
-      canvasWidth / image.naturalWidth,
-      (canvasHeight * 0.48) / image.naturalHeight
+      canvasWidth / imageWidth,
+      canvasHeight / imageHeight
     );
 
-    width = image.naturalWidth * scale;
-    height = image.naturalHeight * scale;
+    width = imageWidth * scale;
+    height = imageHeight * scale;
 
     x = (canvasWidth - width) / 2;
-    y = canvasHeight * 0.075;
+    y = (canvasHeight - height) / 2;
 
   } else {
     /*
-      Desktop: fill the entire canvas
-      while maintaining image proportions.
+      Desktop:
+      Fill the entire cinematic hero.
     */
 
     const scale = Math.max(
-      canvasWidth / image.naturalWidth,
-      canvasHeight / image.naturalHeight
+      canvasWidth / imageWidth,
+      canvasHeight / imageHeight
     );
 
-    width = image.naturalWidth * scale;
-    height = image.naturalHeight * scale;
+    width = imageWidth * scale;
+    height = imageHeight * scale;
 
     x = (canvasWidth - width) / 2;
     y = (canvasHeight - height) / 2;
   }
 
-  ctx.fillStyle = "#b12b1b";
-  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+  ctx.fillStyle = "#9d221d";
 
-  ctx.drawImage(image, x, y, width, height);
+  ctx.fillRect(
+    0, 0,
+    canvasWidth,
+    canvasHeight
+  );
+
+  ctx.drawImage(
+    image,
+    x, y,
+    width, height
+  );
 
   displayedFrame = index;
 }
 
-/* REQUEST NEXT DRAW */
+/* ==========================================
+   SCHEDULE DRAW
+========================================== */
 
 function requestDraw() {
-  if (!ctx || drawing) return;
+  if (!ctx || drawScheduled) return;
 
-  drawing = true;
+  drawScheduled = true;
   requestAnimationFrame(drawFrame);
 }
 
-/* CANVAS RESIZING */
+/* ==========================================
+   RESIZE CANVAS
+========================================== */
 
 function resizeCanvas() {
   if (!canvas || !ctx) return;
@@ -296,44 +298,78 @@ function resizeCanvas() {
   requestDraw();
 }
 
-/* SCROLL PROGRESS */
+/* ==========================================
+   SCROLL POSITION
+========================================== */
 
-function scrollProgress() {
+function getScrollProgress() {
   if (!hero) return 0;
 
-  const availableScroll = Math.max(
+  const rect = hero.getBoundingClientRect();
+
+  const isMobile = window.innerWidth <= 600;
+
+  if (isMobile) {
+    /*
+      Mobile hero has natural document height.
+      Animate as the user scrolls through it.
+    */
+
+    const travel = Math.max(
+      1,
+      hero.offsetHeight - window.innerHeight
+    );
+
+    return Math.min(
+      1,
+      Math.max(0, -rect.top / travel)
+    );
+  }
+
+  /*
+    Desktop hero is sticky.
+  */
+
+  const travel = Math.max(
     1,
     hero.offsetHeight - window.innerHeight
   );
 
-  const progress =
-    -hero.getBoundingClientRect().top / availableScroll;
-
-  return Math.min(1, Math.max(0, progress));
+  return Math.min(
+    1,
+    Math.max(0, -rect.top / travel)
+  );
 }
 
-/* UPDATE ANIMATION */
+/* ==========================================
+   UPDATE ANIMATION
+========================================== */
 
 function updateAnimation() {
   if (!hero || reducedMotion) return;
 
-  const frame = Math.round(
-    scrollProgress() * (TOTAL_FRAMES - 1)
+  const progress = getScrollProgress();
+
+  const next = Math.round(
+    progress * (TOTAL_FRAMES - 1)
   );
 
-  if (frame !== targetFrame) {
-    targetFrame = frame;
-    loadNearby(targetFrame);
+  if (next !== targetFrame) {
+    targetFrame = next;
+    loadNearby(next);
   }
 
   requestDraw();
 }
 
-/* INITIALIZE HERO */
+/* ==========================================
+   INITIALIZE HERO
+========================================== */
 
 if (canvas && hero && ctx) {
-  requestFrame(0);
   resizeCanvas();
+
+  requestFrame(0);
 
   if (!reducedMotion) {
     loadNearby(0);
@@ -374,7 +410,9 @@ if (canvas && hero && ctx) {
   );
 }
 
-/* REVEAL ON SCROLL */
+/* ==========================================
+   SCROLL REVEAL
+========================================== */
 
 const revealElements = document.querySelectorAll(
   ".reveal"
@@ -387,7 +425,6 @@ if (
   revealElements.forEach(element => {
     element.classList.add("visible");
   });
-
 } else {
   const observer = new IntersectionObserver(
     entries => {
@@ -409,19 +446,25 @@ if (
   });
 }
 
-/* MOBILE NAVIGATION */
+/* ==========================================
+   MOBILE NAVIGATION
+========================================== */
 
 const menu = document.querySelector(".nav-toggle");
 const nav = document.querySelector(".nav");
 
 if (menu && nav) {
   menu.addEventListener("click", () => {
-    const open = nav.classList.toggle("open");
+    const isOpen = nav.classList.toggle("open");
 
-    menu.setAttribute("aria-expanded", String(open));
+    menu.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
     menu.setAttribute(
       "aria-label",
-      open ? "Close navigation" : "Open navigation"
+      isOpen ? "Close navigation" : "Open navigation"
     );
   });
 
@@ -443,7 +486,9 @@ if (menu && nav) {
   });
 }
 
-/* COPYRIGHT YEAR */
+/* ==========================================
+   COPYRIGHT YEAR
+========================================== */
 
 const year = document.getElementById("year");
 
