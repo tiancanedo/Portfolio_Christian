@@ -3,22 +3,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101010">
+
   <meta name="description"
-        content="Christian Tabanas — BSIT student exploring web development, UI/UX design, and creative technology.">
+    content="Christian Tabanas — BSIT student exploring web development, UI/UX design, and creative technology.">
 
   <title>Christian Tabanas | Student Developer</title>
 
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
@@ -26,23 +22,22 @@
 
 <body>
 
-  <!-- HEADER -->
+  <!-- NAVIGATION -->
   <header class="header">
-    <a class="wordmark" href="#home">
+    <a href="#home" class="wordmark">
       CHRISTIAN TABANAS<span>.</span>
     </a>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-label="Toggle navigation"
-      aria-controls="nav-links"
-      aria-expanded="false">
-      <span></span><span></span><span></span>
+    <button class="nav-toggle" type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="nav-links">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
-    <nav class="nav" id="nav-links"
-         aria-label="Main navigation">
+    <nav class="nav" id="nav-links" aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -50,15 +45,15 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <a class="header-link" href="#contact">
+    <a href="#contact" class="header-link">
       Get in touch <span>↗</span>
     </a>
   </header>
 
   <main>
 
-    <!-- HERO / SCROLL ANIMATION -->
-    <section class="hero-scroll" id="home">
+    <!-- SCROLL-DRIVEN HERO -->
+    <section id="home" class="hero-scroll">
       <div class="hero-sticky">
 
         <canvas id="hero-canvas"
@@ -69,11 +64,8 @@
         <div class="hero-gradient"></div>
 
         <div class="hero-layout">
-
           <div class="hero-left">
-            <p class="hero-intro">
-              Hey, I'm Christian
-            </p>
+            <p class="hero-intro">Hey, I'm Christian</p>
 
             <h1>
               Creating<br>
@@ -96,11 +88,10 @@
               and progress as I grow in technology.
             </p>
 
-            <a class="hero-button" href="#projects">
+            <a href="#projects" class="hero-button">
               Explore Projects <span>↗</span>
             </a>
           </div>
-
         </div>
 
         <div class="hero-bottom">
@@ -109,7 +100,6 @@
           <div><span>03</span><p>Programming</p></div>
           <div><span>04</span><p>Creative Technology</p></div>
         </div>
-
       </div>
     </section>
 
@@ -120,9 +110,7 @@
         <div class="container about-layout">
 
           <div class="about-heading reveal">
-            <span class="section-label">
-              01 / BEHIND THE SCREEN
-            </span>
+            <span class="section-label">01 / BEHIND THE SCREEN</span>
 
             <h2>
               Shaping<br>
@@ -137,28 +125,24 @@
 
             <p>
               I'm <strong>Christian Tabanas</strong>,
-              a Bachelor of Science in Information
-              Technology student at
-              <strong>Cebu Eastern College</strong>.
-              I'm interested in web development,
-              UI/UX design, visual creativity,
-              and building digital solutions that
-              are useful and easy to understand.
+              a Bachelor of Science in Information Technology
+              student at <strong>Cebu Eastern College</strong>.
+              I'm interested in web development, UI/UX design,
+              visual creativity, and building digital solutions
+              that are useful and easy to understand.
             </p>
 
             <p>
               Through class activities and group projects,
               I'm developing my skills in programming,
-              interface design, teamwork, and
-              problem-solving. I'm still learning,
-              and I believe every project is a
-              chance to improve.
+              interface design, teamwork, and problem-solving.
+              I'm still learning, and I believe every project
+              is a chance to improve.
             </p>
 
             <p class="about-goal">
-              My goal is to keep learning, create
-              meaningful work, and grow into a
-              skilled IT professional.
+              My goal is to keep learning, create meaningful
+              work, and grow into a skilled IT professional.
             </p>
 
             <a href="#contact" class="orange-button">
@@ -174,9 +158,7 @@
         <div class="container">
 
           <div class="section-heading reveal">
-            <span class="section-label">
-              02 / CAPABILITIES
-            </span>
+            <span class="section-label">02 / CAPABILITIES</span>
 
             <h2>
               My Current<br>
@@ -194,13 +176,16 @@
             <article class="skill-item reveal">
               <div class="skill-number">01 /</div>
               <h3>Web<br>Development</h3>
+
               <p>
                 Learning to build structured web pages,
                 responsive layouts, and interactive
                 website features.
               </p>
+
               <div class="tags">
-                <span>HTML</span><span>CSS</span>
+                <span>HTML</span>
+                <span>CSS</span>
                 <span>JavaScript</span>
               </div>
             </article>
@@ -208,11 +193,13 @@
             <article class="skill-item reveal">
               <div class="skill-number">02 /</div>
               <h3>UI/UX &amp;<br>Visual Design</h3>
+
               <p>
-                Exploring interface layouts, visual
-                hierarchy, user-friendly screens,
-                and creative assets for projects.
+                Exploring interface layouts, visual hierarchy,
+                user-friendly screens, and creative assets
+                for projects.
               </p>
+
               <div class="tags">
                 <span>UI Design</span>
                 <span>Wireframes</span>
@@ -223,11 +210,13 @@
             <article class="skill-item reveal">
               <div class="skill-number">03 /</div>
               <h3>Programming<br>&amp; Teamwork</h3>
+
               <p>
                 Practicing logical thinking, debugging,
                 communicating ideas, and working with
                 teammates on school projects.
               </p>
+
               <div class="tags">
                 <span>C# / C++</span>
                 <span>Problem Solving</span>
@@ -244,9 +233,7 @@
         <div class="container">
 
           <div class="section-heading reveal">
-            <span class="section-label">
-              03 / CURRENT PROJECTS
-            </span>
+            <span class="section-label">03 / SELECTED PROJECTS</span>
 
             <h2>
               Work In<br>
@@ -254,25 +241,22 @@
             </h2>
 
             <p>
-              Projects I'm currently working on
-              as a BS Information Technology student.
+              Projects I'm working on as an
+              Information Technology student.
             </p>
           </div>
 
           <div class="projects-grid">
 
-            <!-- RACOS -->
+            <!-- PROJECT 01: RACOS -->
             <article class="project reveal">
+
               <div class="project-image racos-scene">
 
                 <div class="racos-topbar">
                   <strong>R<span>ACOS</span></strong>
-                  <span class="racos-links">
-                    HOME &nbsp; CARS &nbsp; ABOUT
-                  </span>
-                  <span class="racos-rent">
-                    RENT NOW ↗
-                  </span>
+                  <span class="racos-links">HOME &nbsp; CARS &nbsp; ABOUT</span>
+                  <span class="racos-rent">RENT NOW ↗</span>
                 </div>
 
                 <div class="racos-scene-content">
@@ -310,6 +294,7 @@
                   <span>02 / BOOK ONLINE</span>
                   <span>03 / DRIVE</span>
                 </div>
+
               </div>
 
               <div class="project-info">
@@ -320,10 +305,9 @@
                 <h3>RACOS</h3>
 
                 <p>
-                  An online car-rental system
-                  featuring vehicle browsing,
-                  login, registration, and
-                  online rental services.
+                  An online car-rental system featuring
+                  vehicle browsing, login, registration,
+                  and online rental services.
                 </p>
 
                 <div class="tags">
@@ -334,14 +318,13 @@
               </div>
             </article>
 
-            <!-- GOAL-TIME -->
+            <!-- PROJECT 02: GOAL-TIME -->
             <article class="project reveal">
+
               <div class="project-image goal-scene">
 
                 <div class="goal-scene-top">
-                  <strong>
-                    GOAL<span>-TIME</span>
-                  </strong>
+                  <strong>GOAL<span>-TIME</span></strong>
                   <span>SOCCER GAME</span>
                 </div>
 
@@ -357,8 +340,7 @@
                   </h3>
                 </div>
 
-                <div class="soccer-field"
-                     aria-hidden="true">
+                <div class="soccer-field" aria-hidden="true">
                   <div class="field-line"></div>
                   <div class="field-circle"></div>
                   <div class="soccer-ball">⚽</div>
@@ -369,6 +351,7 @@
                   <span>FRIENDLY MATCH</span>
                   <span>TOURNAMENT</span>
                 </div>
+
               </div>
 
               <div class="project-info">
@@ -379,10 +362,9 @@
                 <h3>GOAL-TIME</h3>
 
                 <p>
-                  A soccer game currently in
-                  development, created as part
-                  of my IT journey while improving
-                  my technical skills, creativity,
+                  A soccer game currently in development,
+                  created as part of my IT journey while
+                  improving my technical skills, creativity,
                   and problem-solving abilities.
                 </p>
 
@@ -398,8 +380,9 @@
               </div>
             </article>
 
-            <!-- LION'S DEN -->
+            <!-- PROJECT 03: LION'S DEN -->
             <article class="project reveal">
+
               <div class="project-image lions-scene">
 
                 <div class="lions-sun"></div>
@@ -415,13 +398,10 @@
                     <em>DEN.</em>
                   </h3>
 
-                  <p>
-                    Survive. Outrun. Keep moving.
-                  </p>
+                  <p>Survive. Outrun. Keep moving.</p>
                 </div>
 
-                <div class="savannah-land"
-                     aria-hidden="true">
+                <div class="savannah-land" aria-hidden="true">
                   <div class="savannah-tree tree-one"></div>
                   <div class="savannah-tree tree-two"></div>
                 </div>
@@ -430,6 +410,7 @@
                   <span>YOU ARE BEING CHASED</span>
                   <strong>RUN TO SURVIVE →</strong>
                 </div>
+
               </div>
 
               <div class="project-info">
@@ -440,12 +421,11 @@
                 <h3>LION'S DEN</h3>
 
                 <p>
-                  A survival game project where
-                  Kai must escape pursuing lions
-                  in the savannah. My role focuses
-                  on UI/UX design and visual assets
-                  to help create an engaging and
-                  immersive gaming experience.
+                  A survival game project where Kai must
+                  escape pursuing lions in the savannah.
+                  My role focuses on UI/UX design and
+                  visual assets to help create an engaging
+                  and immersive gaming experience.
                 </p>
 
                 <div class="tags">
@@ -460,12 +440,152 @@
               </div>
             </article>
 
+            <!-- PROJECT 04: ALERTO -->
+            <article class="project reveal">
+
+              <div class="project-image alerto-scene">
+
+                <div class="alerto-scene-copy">
+                  <span class="alerto-eyebrow">
+                    AI-POWERED INCIDENT REPORTING
+                  </span>
+
+                  <h3>ALERTO<span>.</span></h3>
+
+                  <p class="alerto-headline">
+                    REPORT.<br>
+                    VERIFY.<br>
+                    STAY SAFE.
+                  </p>
+
+                  <span class="alerto-app-label">
+                    MOBILE APPLICATION
+                  </span>
+                </div>
+
+                <div class="alerto-device">
+
+                  <div class="alerto-screen">
+
+                    <div class="alerto-status">
+                      <span>9:41</span>
+                      <span>● ▰</span>
+                    </div>
+
+                    <div class="alerto-app-header">
+                      <div class="alerto-app-symbol">A</div>
+
+                      <div>
+                        <strong>ALERTO</strong>
+                        <small>Community Safety</small>
+                      </div>
+
+                      <span class="alerto-bell">♧</span>
+                    </div>
+
+                    <div class="alerto-welcome">
+                      <small>WELCOME TO ALERTO</small>
+
+                      <h4>
+                        Stay Safe.<br>
+                        Stay Alert.
+                      </h4>
+
+                      <p>
+                        Report incidents in your community.
+                      </p>
+                    </div>
+
+                    <div class="alerto-report-card">
+
+                      <div class="alerto-report-heading">
+                        <span>▣</span>
+                        <strong>REPORT AN INCIDENT</strong>
+                      </div>
+
+                      <p>
+                        Submit details for verification.
+                      </p>
+
+                      <div class="alerto-upload">
+                        <span>＋</span>
+                        <strong>UPLOAD INCIDENT PHOTO</strong>
+                        <small>Tap to select an image</small>
+                      </div>
+
+                      <div class="alerto-location">
+                        <span>⌖</span>
+                        <span>Incident Location</span>
+                        <strong>GPS</strong>
+                      </div>
+
+                      <div class="alerto-submit">
+                        SUBMIT REPORT →
+                      </div>
+                    </div>
+
+                    <div class="alerto-reports">
+                      <div class="alerto-reports-title">
+                        <strong>MY REPORTS</strong>
+                        <span>VIEW ALL →</span>
+                      </div>
+
+                      <div class="alerto-report-item">
+                        <span>▤</span>
+
+                        <div>
+                          <strong>Incident Report</strong>
+                          <small>Pending Verification</small>
+                        </div>
+
+                        <span class="alerto-pending">
+                          PENDING
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="project-info">
+                <span class="project-category">
+                  CAPSTONE PROJECT / AI-ASSISTED REPORTING
+                </span>
+
+                <h3>ALERTO</h3>
+
+                <p>
+                  ALERTO is an AI-powered, image-based incident
+                  reporting system developed for Barangay
+                  Mambaling, Cebu City. The application allows
+                  citizens to submit incident photos, descriptions,
+                  and GPS locations. Reports undergo preliminary
+                  AI classification, human verification, and
+                  routing to the appropriate authorities.
+                </p>
+
+                <div class="tags">
+                  <span>Flutter</span>
+                  <span>Artificial Intelligence</span>
+                  <span>PHP / MySQL</span>
+                  <span>Mobile Application</span>
+                </div>
+
+                <span class="project-status">
+                  Capstone Project
+                </span>
+              </div>
+            </article>
+
           </div>
         </div>
       </section>
 
       <!-- CONTACT -->
       <section id="contact" class="contact-section">
+
         <div class="container contact-layout reveal">
 
           <span class="section-label">
@@ -485,16 +605,14 @@
 
           <div class="contact-actions">
 
-            <a
-              class="orange-button"
+            <a class="orange-button"
               href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=tiancanedo@gmail.com"
               target="_blank"
               rel="noopener noreferrer">
               Send an email <span>↗</span>
             </a>
 
-            <a
-              class="contact-outline"
+            <a class="contact-outline"
               href="https://github.com/"
               target="_blank"
               rel="noopener noreferrer">
@@ -507,6 +625,7 @@
       </section>
 
     </div>
+
   </main>
 
   <!-- FOOTER -->
@@ -522,9 +641,7 @@
         MADE WITH CURIOSITY // VERSION 01
       </span>
 
-      <a href="#home">
-        BACK TO TOP ↑
-      </a>
+      <a href="#home">BACK TO TOP ↑</a>
 
     </div>
   </footer>
