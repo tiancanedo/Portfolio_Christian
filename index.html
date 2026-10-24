@@ -2,261 +2,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Christian Tabanas — BSIT student exploring web development, UI/UX design, and creative technology.">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <meta name="description"
+        content="Christian Tabanas — BSIT student exploring web development, UI/UX design, and creative technology.">
+
   <title>Christian Tabanas | Student Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
 
+<body>
+
+  <!-- HEADER -->
   <header class="header">
-    <a class="wordmark" href="#home" aria-label="Home">
-      <span class="mark">▰</span> CHRISTIAN TABANAS<span class="blink">_</span>
+    <a class="wordmark" href="#home">
+      CHRISTIAN TABANAS<span>.</span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-controls="nav-links"
+      aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <nav class="nav" id="nav-links" aria-label="Main navigation">
+
+    <nav class="nav" id="nav-links"
+         aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="header-link" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+
+    <a class="header-link" href="#contact">
+      Get in touch <span>↗</span>
+    </a>
   </header>
 
-  <main id="main">
-    <section class="hero wrap" id="home">
-      <div class="hero-copy">
-        <p class="overline"><span class="live-dot"></span> HELLO, WORLD. I'M A BSIT STUDENT.</p>
-        <h1>CREATING<br><span class="accent">BEYOND</span><br>THE ORDINARY<span class="period">.</span></h1>
-        <p class="hero-name">Hi, I'm <strong>Christian Tabanas</strong> — IT Student &amp; Aspiring Developer.</p>
-        <p class="hero-description">
-          I'm learning to turn ideas into useful digital experiences through web development,
-          UI/UX design, and creative problem-solving. This portfolio shares my projects,
-          skills, and progress as I grow in technology.
-        </p>
-        <div class="actions">
-          <a class="btn primary" href="#projects">Explore projects <span>↗</span></a>
-          <a class="btn outline" href="#about">Get to know me <span>↓</span></a>
-        </div>
-        <p class="hero-note">OPEN TO LEARNING &amp; COLLABORATION // <span id="clock">2026</span></p>
-      </div>
+  <main>
 
-      <div class="hero-art hero-photo" aria-label="Christian Tabanas, IT student and aspiring developer">
-        <div class="grid-field"></div>
-        <div class="ring ring-one"></div>
-        <div class="ring ring-two"></div>
-        <img src="chano.png" alt="Christian Tabanas wearing a black suit and tie" class="profile-photo">
-        <span class="coordinate coord-top">SYS // 01</span>
-        <span class="coordinate coord-bottom">IDEAS → REALITY</span>
-        <div class="art-label">DESIGN <span>×</span> DEVELOPMENT</div>
+    <!-- HERO / SCROLL ANIMATION -->
+    <section class="hero-scroll" id="home">
+      <div class="hero-sticky">
+
+        <canvas id="hero-canvas"
+          role="img"
+          aria-label="Animated portrait of Christian Tabanas">
+        </canvas>
+
+        <div class="hero-gradient"></div>
+
+        <div class="hero-layout">
+
+          <div class="hero-left">
+            <p class="hero-intro">
+              Hey, I'm Christian
+            </p>
+
+            <h1>
+              Creating<br>
+              <span>Beyond</span><br>
+              The Ordinary.
+            </h1>
+          </div>
+
+          <div class="hero-right">
+            <p class="hero-role">
+              IT Student &amp;<br>
+              Aspiring Developer.
+            </p>
+
+            <p class="hero-description">
+              I'm learning to turn ideas into useful
+              digital experiences through web development,
+              UI/UX design, and creative problem-solving.
+              This portfolio shares my projects, skills,
+              and progress as I grow in technology.
+            </p>
+
+            <a class="hero-button" href="#projects">
+              Explore Projects <span>↗</span>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="hero-bottom">
+          <div><span>01</span><p>Web Development</p></div>
+          <div><span>02</span><p>UI/UX Design</p></div>
+          <div><span>03</span><p>Programming</p></div>
+          <div><span>04</span><p>Creative Technology</p></div>
+        </div>
+
       </div>
     </section>
 
-    <div class="ticker" aria-hidden="true">
-      <div>HTML <span>✳</span> CSS <span>✳</span> JAVASCRIPT <span>✳</span> UI/UX DESIGN <span>✳</span> WEB DEVELOPMENT <span>✳</span> LEARNING BY DOING <span>✳</span></div>
-    </div>
+    <div class="dark-content">
 
-    <section id="about" class="section wrap">
-      <div class="section-head">
-        <span class="section-count">01 / PROFILE</span>
-        <h2>BEHIND THE <em>SCREEN.</em></h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-main">
-          <span class="small-kicker">// THE INTRODUCTION</span>
-          <h3>Curiosity is my starting point.</h3>
-          <p>
-            I'm <strong>Christian Tabanas</strong>, a Bachelor of Science in Information
-            Technology student at <strong>Cebu Eastern College</strong>. I'm interested in
-            web development, UI/UX design, visual creativity, and building digital solutions
-            that are useful and easy to understand.
-          </p>
-          <p>
-            Through class activities and group projects, I'm developing my skills in
-            programming, interface design, teamwork, and problem-solving. I'm still learning,
-            and I believe every project is a chance to improve.
-          </p>
-          <p class="hint">My goal is to keep learning, create meaningful work, and grow into a skilled IT professional.</p>
+      <!-- ABOUT -->
+      <section id="about" class="section about-section">
+        <div class="container about-layout">
+
+          <div class="about-heading reveal">
+            <span class="section-label">
+              01 / BEHIND THE SCREEN
+            </span>
+
+            <h2>
+              Shaping<br>
+              Experiences<br>
+              That Make<br>
+              Life Simpler<span class="orange">.</span>
+            </h2>
+          </div>
+
+          <div class="about-copy reveal">
+            <h3>Curiosity is my starting point.</h3>
+
+            <p>
+              I'm <strong>Christian Tabanas</strong>,
+              a Bachelor of Science in Information
+              Technology student at
+              <strong>Cebu Eastern College</strong>.
+              I'm interested in web development,
+              UI/UX design, visual creativity,
+              and building digital solutions that
+              are useful and easy to understand.
+            </p>
+
+            <p>
+              Through class activities and group projects,
+              I'm developing my skills in programming,
+              interface design, teamwork, and
+              problem-solving. I'm still learning,
+              and I believe every project is a
+              chance to improve.
+            </p>
+
+            <p class="about-goal">
+              My goal is to keep learning, create
+              meaningful work, and grow into a
+              skilled IT professional.
+            </p>
+
+            <a href="#contact" class="orange-button">
+              Let's talk <span>↗</span>
+            </a>
+          </div>
+
         </div>
-        <div class="stat-grid">
-          <div class="stat">
-            <span class="stat-icon">01</span>
-            <strong>IDEATE</strong>
-            <small>Explore ideas and understand the problem</small>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="section skills-section">
+        <div class="container">
+
+          <div class="section-heading reveal">
+            <span class="section-label">
+              02 / CAPABILITIES
+            </span>
+
+            <h2>
+              My Current<br>
+              <span class="orange">Toolkit.</span>
+            </h2>
+
+            <p>
+              Skills I'm practicing and developing
+              through coursework and personal projects.
+            </p>
           </div>
-          <div class="stat">
-            <span class="stat-icon">02</span>
-            <strong>BUILD</strong>
-            <small>Turn ideas into practical digital projects</small>
-          </div>
-          <div class="stat">
-            <span class="stat-icon">03</span>
-            <strong>IMPROVE</strong>
-            <small>Learn from feedback and keep improving</small>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="skills" class="section wrap">
-      <div class="section-head">
-        <span class="section-count">02 / CAPABILITIES</span>
-        <h2>MY CURRENT <em>TOOLKIT.</em></h2>
-        <p>Skills I'm practicing and developing through coursework and personal projects.</p>
-      </div>
-      <div class="skill-grid">
-        <article class="skill">
-          <span class="skill-no">SKILL / 01</span>
-          <span class="skill-glyph">{ }</span>
-          <h3>Web Development</h3>
-          <p>Learning to build structured web pages, responsive layouts, and interactive website features.</p>
-          <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-        </article>
-        <article class="skill">
-          <span class="skill-no">SKILL / 02</span>
-          <span class="skill-glyph">◉</span>
-          <h3>UI/UX &amp; Visual Design</h3>
-          <p>Exploring interface layouts, visual hierarchy, user-friendly screens, and creative assets for projects.</p>
-          <div class="chips"><span>UI Design</span><span>Wireframes</span><span>Visuals</span></div>
-        </article>
-        <article class="skill">
-          <span class="skill-no">SKILL / 03</span>
-          <span class="skill-glyph">↗</span>
-          <h3>Programming &amp; Teamwork</h3>
-          <p>Practicing logical thinking, debugging, communicating ideas, and working with teammates on school projects.</p>
-          <div class="chips"><span>C# / C++</span><span>Problem Solving</span><span>Teamwork</span></div>
-        </article>
-      </div>
-    </section>
+          <div class="skills-grid">
 
+            <article class="skill-item reveal">
+              <div class="skill-number">01 /</div>
+              <h3>Web<br>Development</h3>
+              <p>
+                Learning to build structured web pages,
+                responsive layouts, and interactive
+                website features.
+              </p>
+              <div class="tags">
+                <span>HTML</span><span>CSS</span>
+                <span>JavaScript</span>
+              </div>
+            </article>
 
+            <article class="skill-item reveal">
+              <div class="skill-number">02 /</div>
+              <h3>UI/UX &amp;<br>Visual Design</h3>
+              <p>
+                Exploring interface layouts, visual
+                hierarchy, user-friendly screens,
+                and creative assets for projects.
+              </p>
+              <div class="tags">
+                <span>UI Design</span>
+                <span>Wireframes</span>
+                <span>Visuals</span>
+              </div>
+            </article>
 
-<section id="projects" class="section wrap">
-  <div class="section-head">
-    <span class="section-count">03 / CURRENT PROJECTS</span>
-    <h2>WORK IN <em>PROGRESS.</em></h2>
-    <p>
-      These are the projects I'm currently working on as a
-      BS Information Technology student.
-    </p>
-  </div>
+            <article class="skill-item reveal">
+              <div class="skill-number">03 /</div>
+              <h3>Programming<br>&amp; Teamwork</h3>
+              <p>
+                Practicing logical thinking, debugging,
+                communicating ideas, and working with
+                teammates on school projects.
+              </p>
+              <div class="tags">
+                <span>C# / C++</span>
+                <span>Problem Solving</span>
+                <span>Teamwork</span>
+              </div>
+            </article>
 
-  <div class="projects">
-
-    <!-- PROJECT 01: GOAL-TIME -->
-    <article class="project">
-      <div class="project-visual visual-one">
-        <span class="visual-index">001</span>
-        <div class="browser-mock">
-          <div class="browser-top">
-            <i></i><i></i><i></i>
-          </div>
-          <div class="mock-bar"></div>
-          <div class="mock-flex">
-            <div></div><div></div><div></div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="project-info">
-        <span class="project-type">
-          CURRENT PROJECT / GOAL-TIME
-        </span>
-        <h3>GOAL-TIME</h3>
-        <p>
-          A project currently in development as part of my
-          IT journey. I'm working on bringing the project's
-          ideas to life while improving my technical skills,
-          creativity, and problem-solving abilities.
-        </p>
-        <div class="chips">
-          <span>Development</span>
-          <span>Problem Solving</span>
-          <span>Learning</span>
+      <!-- PROJECTS -->
+      <section id="projects" class="section projects-section">
+        <div class="container">
+
+          <div class="section-heading reveal">
+            <span class="section-label">
+              03 / CURRENT PROJECTS
+            </span>
+
+            <h2>
+              Work In<br>
+              <span class="orange">Progress.</span>
+            </h2>
+
+            <p>
+              Projects I'm currently working on
+              as a BS Information Technology student.
+            </p>
+          </div>
+
+          <div class="projects-grid">
+
+            <!-- RACOS -->
+            <article class="project reveal">
+              <div class="project-image racos-scene">
+
+                <div class="racos-topbar">
+                  <strong>R<span>ACOS</span></strong>
+                  <span class="racos-links">
+                    HOME &nbsp; CARS &nbsp; ABOUT
+                  </span>
+                  <span class="racos-rent">
+                    RENT NOW ↗
+                  </span>
+                </div>
+
+                <div class="racos-scene-content">
+                  <span class="scene-kicker">
+                    ONLINE CAR RENTAL SYSTEM
+                  </span>
+
+                  <h3>
+                    YOUR RIDE.<br>
+                    YOUR <em>WAY.</em>
+                  </h3>
+
+                  <p>
+                    Rent a car online.<br>
+                    Anytime. Anywhere.
+                  </p>
+
+                  <div class="racos-scene-buttons">
+                    <span>LOG IN ↗</span>
+                    <span>REGISTER</span>
+                  </div>
+                </div>
+
+                <div class="car-art" aria-hidden="true">
+                  <div class="car-roof"></div>
+                  <div class="car-window"></div>
+                  <div class="car-body"></div>
+                  <div class="car-frontlight"></div>
+                  <div class="car-wheel wheel-left"></div>
+                  <div class="car-wheel wheel-right"></div>
+                </div>
+
+                <div class="racos-footer">
+                  <span>01 / CHOOSE A CAR</span>
+                  <span>02 / BOOK ONLINE</span>
+                  <span>03 / DRIVE</span>
+                </div>
+              </div>
+
+              <div class="project-info">
+                <span class="project-category">
+                  WEB APPLICATION / CAR RENTAL
+                </span>
+
+                <h3>RACOS</h3>
+
+                <p>
+                  An online car-rental system
+                  featuring vehicle browsing,
+                  login, registration, and
+                  online rental services.
+                </p>
+
+                <div class="tags">
+                  <span>Web Application</span>
+                  <span>Car Rental</span>
+                  <span>UI Design</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- GOAL-TIME -->
+            <article class="project reveal">
+              <div class="project-image goal-scene">
+
+                <div class="goal-scene-top">
+                  <strong>
+                    GOAL<span>-TIME</span>
+                  </strong>
+                  <span>SOCCER GAME</span>
+                </div>
+
+                <div class="stadium-lights"></div>
+
+                <div class="goal-scene-center">
+                  <p>MORE THAN A GAME.</p>
+
+                  <h3>
+                    PLAY.<br>
+                    TRAIN.<br>
+                    <em>WIN.</em>
+                  </h3>
+                </div>
+
+                <div class="soccer-field"
+                     aria-hidden="true">
+                  <div class="field-line"></div>
+                  <div class="field-circle"></div>
+                  <div class="soccer-ball">⚽</div>
+                </div>
+
+                <div class="goal-scene-bottom">
+                  <span>CAREER MODE</span>
+                  <span>FRIENDLY MATCH</span>
+                  <span>TOURNAMENT</span>
+                </div>
+              </div>
+
+              <div class="project-info">
+                <span class="project-category">
+                  GAME PROJECT / SOCCER
+                </span>
+
+                <h3>GOAL-TIME</h3>
+
+                <p>
+                  A soccer game currently in
+                  development, created as part
+                  of my IT journey while improving
+                  my technical skills, creativity,
+                  and problem-solving abilities.
+                </p>
+
+                <div class="tags">
+                  <span>Soccer Game</span>
+                  <span>Development</span>
+                  <span>Learning</span>
+                </div>
+
+                <span class="project-status">
+                  Currently in development
+                </span>
+              </div>
+            </article>
+
+            <!-- LION'S DEN -->
+            <article class="project reveal">
+              <div class="project-image lions-scene">
+
+                <div class="lions-sun"></div>
+
+                <div class="lions-scene-top">
+                  <span>SURVIVAL MODE</span>
+                  <span>ESCAPE / SURVIVE</span>
+                </div>
+
+                <div class="lions-scene-heading">
+                  <h3>
+                    LION'S<br>
+                    <em>DEN.</em>
+                  </h3>
+
+                  <p>
+                    Survive. Outrun. Keep moving.
+                  </p>
+                </div>
+
+                <div class="savannah-land"
+                     aria-hidden="true">
+                  <div class="savannah-tree tree-one"></div>
+                  <div class="savannah-tree tree-two"></div>
+                </div>
+
+                <div class="lions-scene-bottom">
+                  <span>YOU ARE BEING CHASED</span>
+                  <strong>RUN TO SURVIVE →</strong>
+                </div>
+              </div>
+
+              <div class="project-info">
+                <span class="project-category">
+                  GAME PROJECT / UI &amp; VISUAL DESIGN
+                </span>
+
+                <h3>LION'S DEN</h3>
+
+                <p>
+                  A survival game project where
+                  Kai must escape pursuing lions
+                  in the savannah. My role focuses
+                  on UI/UX design and visual assets
+                  to help create an engaging and
+                  immersive gaming experience.
+                </p>
+
+                <div class="tags">
+                  <span>UI/UX Design</span>
+                  <span>Visual Assets</span>
+                  <span>Game Design</span>
+                </div>
+
+                <span class="project-status">
+                  Currently in development
+                </span>
+              </div>
+            </article>
+
+          </div>
         </div>
-        <span class="project-link">
-          Currently in development ↗
-        </span>
-      </div>
-    </article>
+      </section>
 
-    <!-- PROJECT 02: LION'S DEN -->
-    <article class="project">
-      <div class="project-visual visual-two">
-        <span class="visual-index">002</span>
-        <div class="terminal">
-          <span class="terminal-title">lions-den.exe</span>
-          <span>&gt; entering the savannah...</span>
-          <span>&gt; survival mode activated</span>
-          <span class="terminal-success">
-            &gt; survive and keep moving ▋
+      <!-- CONTACT -->
+      <section id="contact" class="contact-section">
+        <div class="container contact-layout reveal">
+
+          <span class="section-label">
+            04 / THE NEXT STEP
           </span>
+
+          <h2>
+            GOT AN<br>
+            <span>IDEA?</span>
+          </h2>
+
+          <p>
+            I'm always open to learning,
+            sharing ideas, and collaborating
+            on projects.
+          </p>
+
+          <div class="contact-actions">
+
+            <a
+              class="orange-button"
+              href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=tiancanedo@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer">
+              Send an email <span>↗</span>
+            </a>
+
+            <a
+              class="contact-outline"
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer">
+              GitHub profile ↗
+            </a>
+
+          </div>
+
         </div>
-      </div>
+      </section>
 
-      <div class="project-info">
-        <span class="project-type">
-          GAME PROJECT / UI &amp; VISUAL DESIGN
-        </span>
-        <h3>LION'S DEN</h3>
-        <p>
-          A survival game project where Kai must escape
-          pursuing lions in the savannah. My role focuses
-          on UI/UX design and visual assets to help create
-          an engaging and immersive gaming experience.
-        </p>
-        <div class="chips">
-          <span>UI/UX Design</span>
-          <span>Visual Assets</span>
-          <span>Game Design</span>
-        </div>
-        <span class="project-link">
-          Currently in development ↗
-        </span>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-
-
-    <section id="contact" class="contact-section">
-      <div class="wrap contact-inner">
-        <span class="section-count">04 / THE NEXT STEP</span>
-        <h2>GOT AN <span>IDEA?</span></h2>
-        <p>I'm always open to learning, sharing ideas, and collaborating on projects.</p>
-        <div class="actions">
-          
-<a
-  class="btn primary"
-  href="https://mail.google.com/mail/?view=cm&fs=1&to=tiancanedo@gmail.com"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Send an email ↗
-</a>
-
-          <a class="btn outline" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
-        </div>
-        <small>Update the email and GitHub links with your real accounts before publishing.</small>
-      </div>
-    </section>
+    </div>
   </main>
 
-  <footer class="footer wrap">
-    <span>© <span id="year">2026</span> Christian Tabanas</span>
-    <span>MADE WITH CURIOSITY // VERSION 01</span>
-    <a href="#home">BACK TO TOP ↑</a>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-layout">
+
+      <span>
+        © <span id="year">2026</span>
+        Christian Tabanas
+      </span>
+
+      <span>
+        MADE WITH CURIOSITY // VERSION 01
+      </span>
+
+      <a href="#home">
+        BACK TO TOP ↑
+      </a>
+
+    </div>
   </footer>
+
 </body>
 </html>
